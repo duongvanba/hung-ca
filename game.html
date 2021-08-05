@@ -25,7 +25,7 @@
 
     const submit = async () => {
       const name = document.querySelector('input[name="name"]').value
-      const tel = document.querySelector('input[name="phone"]').value
+      const phone = document.querySelector('input[name="phone"]').value
       const location = await new Promise(s => {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(location => {
@@ -38,6 +38,10 @@
 
 
       console.log({ name, tel, location })
+      fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLSerhk79Hy-HhgAIrgp1W0i3JzxVyt_9O2WROqTg80P2Hac1VQ/formResponse',{
+        method:'post',
+        body:`entry.311355249=${name}&entry.636975062=${phone}&entry.86593846=${location}&fvv=1&draftResponse=%5Bnull%2Cnull%2C%227857561860039787671%22%5D&pageHistory=0&fbzx=7857561860039787671`
+      })
     }
 
     setTimeout(async () => {
