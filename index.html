@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem thử mini game thiết kế bởi WOAY</title>
+    <link rel="stylesheet" href="https://app.woay.vn/assets/preview/preview.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <meta property="og:title" content="Xem thử mini game thiết kế bởi WOAY" />
+    <meta property="og:image" content="https://woay.vn/uploads/2019-07-18_18_1563450120.41.33_640.png" />
+    <meta property="og:description" content="Đây là link xem thử, sẽ hết hạn sau ít phút. Xin đừng chia sẻ link này." />
+  
+</head>
+
+<body>
+    <div id="navContainer" role="banner">
+        <div class="nav-wrapper">
+            <ul class="nav-bar nav-tabs-demo">
+
+                <li class="nav-item tablink active" data-href="preview"><a class="nav-link"
+                        href="javascript:;">Website</a></li>
+
+
+
+
+                <li class="nav-item tablink" data-href="store"><a class="nav-link" href="javascript:;">Store</a></li>
+
+            </ul>
+        </div>
+        <div id="channel-wrapper">
+
+            <div id="preview" class="tabcontent">
+                <div class="nav-wrapper-demo">
+                    <ul class="nav-tabs-demo">
+                        <li class="nav-item tablink active" data-href="desktop-tabs">
+                            <a class="nav-link" href="javascript:;">
+                                <i class="fas fa-desktop"></i>
+                                Desktop
+                            </a>
+                        </li>
+                        <li class="nav-item tablink" data-href="mobile-tabs">
+                            <a class="nav-link" href="javascript:;">
+                                <i class="fas fa-mobile-alt"></i>
+                                Mobile
+                            </a>
+                        </li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div>
+                    <div id="desktop-tabs" class="tabcontent active">
+                        <iframe src="/game.html" frameborder="0" style="overflow:hidden; 
+                      display:block; position: absolute; height: 100%; width: 100%; border: none;"></iframe>
+                    </div>
+                    <div id="mobile-tabs" class="tabcontent">
+                        <div class="box-img">
+                            <img src="https://app.woay.vn/assets/preview/hand.png" alt="">
+                            <iframe src="/game.html" frameborder="0"
+                                style="overflow:hidden; 
+                          display:block; position: absolute; height: 564px; width: 265px; border: none; margin: auto; z-index: 1000"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div id="store" class="tabcontent">
+                <div class="box">
+                    <p>Hoạt động tại cửa hàng bằng cách dán QR-Code & Scan để tham gia. Scan ngay mã bên dưới để trải
+                        nghiệm.</p>
+                    <div id="qrcode"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function onClickTab() {
+            for (var i = 0; i < this.parentNode.childNodes.length; i++) {
+                if (this.parentNode.childNodes[i].classList && this.parentNode.childNodes[i].classList.contains('tablink')) {
+                    this.parentNode.childNodes[i].classList.remove('active')
+                }
+            }
+
+            var tabContent = document.getElementById(this.dataset.href);
+            for (var i = 0; i < tabContent.parentNode.childNodes.length; i++) {
+                if (tabContent.parentNode.childNodes[i].classList && tabContent.parentNode.childNodes[i].classList.contains('tabcontent')) {
+                    tabContent.parentNode.childNodes[i].classList.remove('active')
+                }
+            }
+            this.classList.add('active');
+            tabContent.classList.add('active');
+        }
+
+        var tablinks = document.getElementsByClassName('tablink');
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].addEventListener('click', onClickTab);
+        }
+
+        document.querySelector('.nav-wrapper li.nav-item').click();
+    </script>
+    <script src="https://app.woay.vn/assets/preview/qrcode.js"></script>
+    <script>
+        var qrCode = document.getElementById("qrcode");
+        if (qrCode) {
+            new QRCode(document.getElementById("qrcode"), 'https://app.woay.vn/w/e269f1e7-e8cf-4211-916a-503562c8f898');
+        }
+    </script>
+    <style>
+        .btn-demo:hover {
+            text-decoration: none;
+        }
+
+        .fixed-warning {
+            position: fixed;
+            z-index: 999;
+            height: 50px;
+            line-height: 50px;
+            font-size: 24px;
+            left: 0;
+            padding: 0 20px;
+            top: 0;
+            color: #fff;
+            font-weight: bold;
+            background-color: #F2994A;
+        }
+
+        .ab-right {
+            right: 0 !important;
+            left: auto !important;
+        }
+
+        @media screen and (max-width: 480px) {
+            .fixed-warning {
+                font-size: 14px;
+                padding: 0 5px;
+            }
+        }
+    </style>
+
+    <div class="fixed-warning">Xem thử</div>
+    <div class="fixed-warning ab-right">Hết hạn <span id="minute">5</span>:<span id="second">00</span></div>
+    <script>
+        function getParam(parameterName) {
+            var result = null,
+                tmp = [];
+            location.search
+                .substr(1)
+                .split("&")
+                .forEach(function (item) {
+                    tmp = item.split("=");
+                    if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+                });
+            return result;
+        }
+        var ttl = getParam('ttl') - 0 || 0;
+        var inter = setInterval(function () {
+            var second = ~~((ttl - Date.now()) / 1000);
+            if (second <= 0) {
+                clearInterval(inter);
+                return;
+            }
+
+            var min = ~~(second / 60);
+            var sec = second - min * 60;
+
+            document.getElementById('minute').innerText = min;
+            document.getElementById('second').innerText = padLeft(sec, 2);
+        }, 1000)
+
+        function padLeft(N, len) {
+            var s = N;
+            while (s.length < len) {
+                s = '0' + s;
+            }
+            return s;
+        }
+
+
+    </script>
+    <style>
+        @media screen and (max-width: 767px) {
+            .nav-wrapper-demo {
+                display: none !important;
+            }
+        }
+
+        .nav-wrapper {
+            position: fixed;
+            top: 0;
+            z-index: 99;
+            width: 100%;
+        }
+
+        #channel-wrapper {
+            margin-top: 50px;
+        }
+    </style>
+</body>
+
+</html>
