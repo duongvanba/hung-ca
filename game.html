@@ -24,14 +24,12 @@
 
 
     const submit = async () => {
-      const name = document.querySelector('input[type="name"]').value
-      const tel = document.querySelector('input[type="tel"]').value
-      const location = ''
-      await new Promise(s => {
+      const name = document.querySelector('input[name="name"]').value
+      const tel = document.querySelector('input[name="phone"]').value
+      const location = await new Promise(s => {
         if (navigator.geolocation) {
-          console.log('Has geolocation')
           navigator.geolocation.getCurrentPosition(location => {
-            s(location)
+            s(`http://www.google.com/maps/place/${location.coords.latitude},${location.coords.longitude}`)
           });
         } else {
           s('No location')
@@ -39,7 +37,7 @@
       })
 
 
-      alert(JSON.stringify(console.log({ name, tel, location })))
+      console.log({ name, tel, location })
     }
 
     setTimeout(async () => {
