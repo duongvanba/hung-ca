@@ -52,7 +52,6 @@
       while (true) {
         const button = document.getElementById('btn-woay-form-submit')
         if (button) {
-          console.log(button)
           button.addEventListener('click', submit)
           return
         }
@@ -282,7 +281,6 @@
     }
 
     document.querySelector('.m-menu-btn').addEventListener("click", function () {
-      console.log('click btn menu mobile')
       document.querySelector('.m-menu-overlay').style.display = 'block';
       document.querySelector('.m-menu-wrapper').style.right = 0;
     })
